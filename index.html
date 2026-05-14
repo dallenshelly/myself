@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M. Dallen Shelly | Cybernaut & Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(ellipse at top, #0a0f1e, #05080f);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Gradient Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(125deg, 
+                #0a0f1e 0%, 
+                #0f1424 25%, 
+                #1a0f2e 50%, 
+                #0f1424 75%, 
+                #0a0f1e 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(102, 126, 234, 0.4);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            filter: blur(2px);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Neon Glow Effect */
+        .glow {
+            text-shadow: 0 0 10px rgba(102, 126, 234, 0.5),
+                         0 0 20px rgba(102, 126, 234, 0.3),
+                         0 0 30px rgba(102, 126, 234, 0.1);
+        }
+
+        /* Advanced Glass Effect */
+        .glass {
+            background: rgba(10, 15, 30, 0.4);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass:hover {
+            border-color: rgba(102, 126, 234, 0.6);
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header with 3D effect */
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            position: relative;
+        }
+
+        .profile-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 70px;
+            border: 3px solid rgba(102, 126, 234, 0.5);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+        }
+
+        .online-badge {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            background: #4ade80;
+            border-radius: 50%;
+            border: 2px solid #0a0f1e;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #8892b0;
+            margin-bottom: 15px;
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .badge {
+            background: rgba(102, 126, 234, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .nav-btn {
+            background: rgba(10, 15, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            padding: 12px 28px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(102, 126, 234, 0.5);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .nav-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Sections */
+        .section {
+            display: none;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Cards Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .project-card {
+            background: rgba(10, 15, 30, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        /* Skill Tags */
+        .skill-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(102,126,234,0.3), rgba(118,75,162,0.3));
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        /* Stats */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 25px;
+            background: rgba(10, 15, 30, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: #667eea;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            background: rgba(10, 15, 30, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            font-weight: 500;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Contact Form */
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            background: rgba(10, 15, 30, 0.6);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+            background: rgba(10, 15, 30, 0.8);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 14px 35px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(102, 126, 234, 0.2);
+            background: rgba(10, 15, 30, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0f1e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 15px; }
+            .grid { grid-template-columns: 1fr; }
+            .nav-btn { padding: 8px 20px; font-size: 0.9rem; }
+        }
+
+        /* Typing Animation */
+        .typing {
+            border-right: 2px solid #667eea;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #667eea; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="animated-bg"></div>
+<div class="particles" id="particles"></div>
+
+<div class="container">
+    <header>
+        <div class="profile-wrapper">
+            <div class="profile-img" id="profileImg">
+                <!-- Add your photo here - replace the emoji with an image -->
+                👨‍🚀
+                <!-- To add your photo, replace the line above with:
+                <img src="your-photo.jpg" alt="M. Dallen Shelly">
+                -->
+            </div>
+            <div class="online-badge"></div>
+        </div>
+        <h1 class="glow">M. Dallen Shelly</h1>
+        <div class="tagline typing">⚡ Ethical Hacker | Full-Stack Developer | Tech Repair Expert | Space Enthusiast</div>
+        <div class="badge-container">
+            <span class="badge">🔓 HTH Lab Operator</span>
+            <span class="badge">🛠️ PC/Phone/Laptop Repair</span>
+            <span class="badge">💻 7+ macOS Versions</span>
+            <span class="badge">🐧 15+ Linux Distros</span>
+            <span class="badge">🪟 All Windows OS</span>
+        </div>
+    </header>
+
+    <nav>
+        <button class="nav-btn active" onclick="showSection('home')">🏠 Home</button>
+        <button class="nav-btn" onclick="showSection('projects')">🚀 Projects</button>
+        <button class="nav-btn" onclick="showSection('skills')">💻 Skills & OS</button>
+        <button class="nav-btn" onclick="showSection('repair')">🔧 Tech Repair</button>
+        <button class="nav-btn" onclick="showSection('space')">🔭 Space & Sim</button>
+        <button class="nav-btn" onclick="showSection('contact')">📧 Contact</button>
+    </nav>
+
+    <!-- Home Section -->
+    <div id="home" class="section active">
+        <div class="glass" style="padding: 45px;">
+            <h2 style="color: #667eea; margin-bottom: 20px; font-size: 2rem;">✨ About Me</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 20px; line-height: 1.8;">
+                I'm a passionate <strong style="color: #667eea;">Ethical Hacker</strong>, <strong style="color: #667eea;">Full-Stack Developer</strong>, and <strong style="color: #667eea;">Tech Repair Specialist</strong> who loves exploring 
+                the intersection of code, security, hardware, and the cosmos. I run <strong style="color: #667eea;">Hack The Heck (HTH) Lab</strong> and have coded 
+                over <strong style="color: #667eea;">2000+ files</strong> across various languages and frameworks.
+            </p>
+            <p style="font-size: 1.1rem; margin-bottom: 20px;">
+                I can fix <strong>almost any problem</strong> in PCs, phones, laptops, and other electronic devices. From hardware repairs to software troubleshooting, 
+                I've seen it all across <strong>Windows (95 to 11)</strong>, <strong>macOS (7+ versions)</strong>, and <strong>Linux (15+ distros)</strong>.
+            </p>
+            
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-number">2000+</div>
+                    <div>Files Created</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">195+</div>
+                    <div>Space Simulations</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">20+</div>
+                    <div>OS Mastered</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1000+</div>
+                    <div>Devices Repaired</div>
+                </div>
+            </div>
+
+            <div class="social-links">
+                <a href="https://github.com/dallenshelly" target="_blank" class="social-link">🐙 GitHub</a>
+                <a href="https://instagram.com/dallenshelly" target="_blank" class="social-link">📸 Instagram</a>
+                <a href="mailto:dallenshelly@proton.me" class="social-link">📧 Proton Mail</a>
+                <a href="#" class="social-link">🕵️ @dallenshelly</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects Section -->
+    <div id="projects" class="section">
+        <h2 style="color: #667eea; margin-bottom: 20px; font-size: 2rem;">🚀 Featured Projects</h2>
+        <div class="grid">
+            <div class="project-card">
+                <div class="project-title">✈️ Air Attack Game</div>
+                <p>Python-based aerial combat shooter with 5,000-12,000 lines of code. Features boss battles, power-ups, and space-themed combat in deep space.</p>
+                <div style="margin-top: 15px;">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Pygame</span>
+                    <span class="skill-tag">Game Dev</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">📱 Phone Repair Website</div>
+                <p>PHP-based server-side website for phone repair business with inventory management, booking system, and customer portal.</p>
+                <div style="margin-top: 15px;">
+                    <span class="skill-tag">PHP</span>
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">Bootstrap</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">🔐 Secure Login Systems</div>
+                <p>Multiple secure login pages with HTML, CSS, and JS. Includes authentication, session management, and security features.</p>
+                <div style="margin-top: 15px;">
+                    <span class="skill-tag">HTML/CSS</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Security</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">🌌 Space Engine Simulations</div>
+                <p>195+ astrophysical simulations using Universe Sandbox and Space Engine 0.991.49.2095. Exploring planetary systems and cosmic phenomena.</p>
+                <div style="margin-top: 15px;">
+                    <span class="skill-tag">Simulations</span>
+                    <span class="skill-tag">Astrophysics</span>
+                    <span class="skill-tag">Space Engine</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">🛡️ HTH Lab Projects</div>
+                <p>Ethical hacking labs and security research. Penetration testing, vulnerability assessments, and security tools development.</p>
+                <div style="margin-top: 15px;">
+                    <span class="skill-tag">Ethical Hacking</span>
+                    <span class="skill-tag">Security</span>
+                    <span class="skill-tag">Kali Linux</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">💻 Repair Diagnostic Tools</div>
+                <p>Custom diagnostic scripts and tools for PC, phone, and laptop repair. Hardware testing and software troubleshooting utilities.</p>
+                <div style="margin-top: 15px;">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Bash</span>
+                    <span class="skill-tag">PowerShell</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skills Section -->
+    <div id="skills" class="section">
+        <h2 style="color: #667eea; margin-bottom: 20px; font-size: 2rem;">💻 Technical Expertise</h2>
+        
+        <div class="glass" style="padding: 30px; margin-bottom: 25px;">
+            <h3 style="margin-bottom: 15px;">Programming Languages</h3>
+            <div>
+                <span class="skill-tag">PHP</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">HTML5</span>
+                <span class="skill-tag">CSS3</span>
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">Bash</span>
+                <span class="skill-tag">PowerShell</span>
+                <span class="skill-tag">C++</span>
+            </div>
+        </div>
+
+        <h2 style="color: #667eea; margin-bottom: 20px; font-size: 1.8rem;">🖥️ Operating Systems Mastered</h2>
+        <div class="grid">
+            <div class="project-card">
+                <h3 style="color: #667eea; margin-bottom: 15px;">🪟 Windows Family</h3>
+                <p>95, 98, 2000, ME, XP, Vista, 7, 8, 8.1, 10, 11</p>
+                <p style="margin-top: 10px;"><strong>Windows Server:</strong> 2003, 2008, 2012, 2016, 2019, 2022</p>
+            </div>
+            <div class="project-card">
+                <h3 style="color: #667eea; margin-bottom: 15px;">🍎 macOS</h3>
+                <p>OS X 10.7 Lion through macOS 14 Sonoma (7+ versions)</p>
+                <p style="margin-top: 10px;">Expert in Hackintosh and cross-platform troubleshooting</p>
+            </div>
+            <div class="project-card">
+                <h3 style="color: #667eea; margin-bottom: 15px;">🐧 Linux Distros</h3>
+                <p>Kali Linux, Parrot OS, Debian 12/13, RedHat, Ubuntu Server, CentOS, Fedora, Arch, Mint, Manjaro, Pop!_OS, Zorin, Elementary, openSUSE, Alpine</p>
+            </div>
+        </div>
+
+        <h2 style="color: #667eea; margin-bottom: 20px; margin-top: 30px; font-size: 1.8rem;">🛡️ Hacking & Security</h2>
+        <div class="glass" style="padding: 30px;">
+            <p><strong style="color: #667eea;">🔓 Hack The Heck (HTH) Lab</strong> - Ethical hacking practice environment</p>
+            <p style="margin-top: 10px;">Penetration Testing | Vulnerability Assessment | Security Research | CTF Challenges</p>
+            <div style="margin-top: 20px;">
+                <span class="skill-tag">Kali Linux</span>
+                <span class="skill-tag">Metasploit</span>
+                <span class="skill-tag">Wireshark</span>
+                <span class="skill-tag">Nmap</span>
+                <span class="skill-tag">Burp Suite</span>
+                <span class="skill-tag">John the Ripper</span>
+                <span class="skill-tag">Hydra</span>
+                <span class="skill-tag">Sqlmap</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tech Repair Section -->
+    <div id="repair" class="section">
+        <h2 style="color: #667eea; margin-bottom: 20px; font-size: 2rem;">🔧 Tech Repair Services</h2>
+        
+        <div class="grid">
+            <div class="project-card">
+                <div class="project-title">💻 PC Repair</div>
+                <p>Hardware diagnostics, component replacement, motherboard repair, PSU testing, RAM troubleshooting, GPU repair, data recovery, BIOS flashing, thermal paste application.</p>
+                <div style="margin-top: 15px;">
+                    <span class="skill-tag">Hardware</span>
+                    <span class="skill-tag">Soldering</span>
+                    <span class="skill-tag">Diagnostics</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">📱 Phone Repair</div>
+                <p>Screen replacement, battery replacement, charging port repair, water damage recovery, software troubleshooting, jailbreaking, custom ROM installation.</p>
+                <div style="margin-top: 15px;">
+                    <span class="skill-tag">iPhone/Android</span>
+                    <span class="skill-tag">Micro-soldering</span>
+                    <span class="skill-tag">Firmware</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">💼 Laptop Repair</div>
+                <p>Keyboard replacement, hinge repair, screen replacement, cooling system cleaning, fan replacement, DC jack repair, battery calibration.</p>
+                <div style="margin-top: 15px;">
+                    <span class="skill-tag">All Brands</span>
+                    <span class="skill-tag">Component Level</span>
+                    <span class="skill-tag">Diagnostic</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">🖨️ Other Devices</div>
+                <p>Tablet repair, console repair (PS, Xbox, Switch), printer troubleshooting, monitor repair, peripheral repair.</p>
+                <div style="margin-top: 15px;">
+                    <span class="skill-tag">Gaming Consoles</span>
+                    <span class="skill-tag">Tablets</span>
+                    <span class="skill-tag">Peripherals</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass" style="padding: 30px; margin-top: 25px; text-align: center;">
+            <h3 style="color: #667eea; margin-bottom: 15px;">💪 1000+ Devices Successfully Repaired</h3>
+            <p>From simple software fixes to complex component-level repairs, I've helped countless customers get their devices working again.</p>
+            <div style="margin-top: 20px;">
+                <span class="skill-tag">✓ Fast Turnaround</span>
+                <span class="skill-tag">✓ Quality Parts</span>
+                <span class="skill-tag">✓ Warranty on Repairs</span>
+                <span class="skill-tag">✓ Remote Support</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Space Section -->
+    <div id="space" class="section">
+        <h2 style="color: #667eea; margin-bottom: 20px; font-size: 2rem;">🔭 Exploring The Universe</h2>
+        
+        <div class="glass" style="padding: 30px; margin-bottom: 25px; text-align: center;">
+            <h3 style="font-size: 2rem; margin-bottom: 10px;">🪐 Jupiter</h3>
+            <p style="font-size: 1.1rem;">My Favorite Planet - The King of Planets with its Great Red Spot and 79 moons</p>
+        </div>
+
+        <div class="grid">
+            <div class="project-card">
+                <h3 style="color: #667eea; margin-bottom: 15px;">🌌 Space Engine</h3>
+                <p><strong>Version:</strong> 0.991.49.2095</p>
+                <p>Exploring procedurally generated galaxies, nebulae, black holes, and planetary systems. Realistic universe simulation with billions of celestial bodies.</p>
+            </div>
+            <div class="project-card">
+                <h3 style="color: #667eea; margin-bottom: 15px;">🎮 Universe Sandbox</h3>
+                <p><strong>195+ Simulations Completed</strong></p>
+                <p>Creating and testing astrophysical scenarios, collision simulations, planetary dynamics, gravity experiments, and cosmic events.</p>
+            </div>
+            <div class="project-card">
+                <h3 style="color: #667eea; margin-bottom: 15px;">🔭 Telescope Astronomy</h3>
+                <p>Observing celestial bodies, tracking Jupiter's moons, Saturn's rings, deep-sky objects, nebulae, and meteor showers.</p>
+            </div>
+        </div>
+
+        <div class="glass" style="padding: 30px; margin-top: 25px;">
+            <h3 style="color: #667eea; margin-bottom: 20px;">🚀 Hobbies & Interests</h3>
+            <div class="grid" style="margin-top: 0;">
+                <div>🔭 Stargazing with my telescope</div>
+                <div>💻 Coding side projects (2000+ files and counting)</div>
+                <div>🎮 Universe Sandbox & Space Engine simulations</div>
+                <div>🛡️ Ethical hacking challenges (HTH Lab)</div>
+                <div>📚 Learning about astrophysics and cosmology</div>
+                <div>🌍 Exploring new Linux distributions</div>
+                <div>🔧 Fixing electronics as a hobby</div>
+                <div>📖 Reading sci-fi and space literature</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact" class="section">
+        <h2 style="color: #667eea; margin-bottom: 20px; font-size: 2rem;">📧 Get In Touch</h2>
+        <div class="grid">
+            <div class="project-card">
+                <h3 style="color: #667eea; margin-bottom: 15px;">📨 Direct Contact</h3>
+                <p><strong>Email:</strong> dallenshelly@proton.me</p>
+                <p><strong>Social:</strong> @dallenshelly</p>
+                <p><strong>GitHub:</strong> github.com/dallenshelly</p>
+                <p><strong>Instagram:</strong> @dallenshelly</p>
+                <p><strong>Discord:</strong> Available on request</p>
+                <div style="margin-top: 20px;">
+                    <span class="skill-tag">🔐 PGP Available</span>
+                    <span class="skill-tag">⚡ Quick Response</span>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <h3 style="color: #667eea; margin-bottom: 15px;">✉️ Send a Message</h3>
+                <form class="contact-form" id="contactForm">
+                    <input type="text" placeholder="Your Name" id="name" required>
+                    <input type="email" placeholder="Your Email" id="email" required>
+                    <select style="width: 100%; padding: 14px; margin-bottom: 15px; background: rgba(10,15,30,0.6); border: 1px solid rgba(102,126,234,0.3); border-radius: 12px; color: #fff;">
+                        <option value="general">General Inquiry</option>
+                        <option value="coding">Coding Project</option>
+                        <option value="repair">Tech Repair</option>
+                        <option value="security">Security/Hacking</option>
+                        <option value="space">Space/SIMs</option>
+                    </select>
+                    <textarea rows="4" placeholder="Your Message" id="message" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="glass" style="padding: 30px; margin-top: 25px; text-align: center;">
+            <h3 style="color: #667eea; margin-bottom: 15px;">🤝 Let's Connect</h3>
+            <p>I'm always open to collaboration, security discussions, repair inquiries, or just chatting about space and coding!</p>
+            <div class="social-links" style="margin-top: 20px;">
+                <a href="https://github.com/dallenshelly" target="_blank" class="social-link">🐙 GitHub</a>
+                <a href="https://instagram.com/dallenshelly" target="_blank" class="social-link">📸 Instagram</a>
+                <a href="mailto:dallenshelly@proton.me" class="social-link">📧 Proton Mail</a>
+                <a href="#" class="social-link">🕵️ @dallenshelly</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 M. Dallen Shelly | Ethical Hacker | Tech Repair Expert | Space Enthusiast | Full-Stack Developer</p>
+        <p style="font-size: 0.9rem; margin-top: 15px; color: #667eea;">"From code to cosmos, from hardware to hacking — exploring infinite possibilities."</p>
+        <p style="font-size: 0.8rem; margin-top: 10px;">🔓 HTH Lab | 💻 2000+ Files | 🔭 195+ Simulations | 🔧 1000+ Repairs</p>
+    </footer>
+</div>
+
+<script>
+    // Generate floating particles
+    function generateParticles() {
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 100;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            const size = Math.random() * 8 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+            particle.style.animationDelay = (Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+    }
+
+    // Section navigation
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        document.getElementById(sectionId).classList.add('active');
+        
+        const buttons = document.querySelectorAll('.nav-btn');
+        buttons.forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        event.target.classList.add('active');
+        
+        // Smooth scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Contact form handler
+    document.getElementById('contactForm')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+        
+        if(name && email && message) {
+            alert(`✨ Thank you ${name}! Your message has been sent.\n\nI'll get back to you at ${email} within 24 hours.`);
+            this.reset();
+        } else {
+            alert('⚠️ Please fill in all fields.');
+        }
+    });
+
+    // Animate stat numbers on scroll
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                const numbers = entry.target.querySelectorAll('.stat-number');
+                numbers.forEach(num => {
+                    const target = parseInt(num.innerText);
+                    let current = 0;
+                    const increment = target / 60;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if(current >= target) {
+                            num.innerText = target + '+';
+                            clearInterval(timer);
+                        } else {
+                            num.innerText = Math.floor(current) + '+';
+                        }
+                    }, 20);
+                });
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    const statSection = document.querySelector('.stat-grid');
+    if(statSection) observer.observe(statSection.parentElement);
+
+    // Initialize particles
+    generateParticles();
+
+    // Add hover effect to profile image (for photo upload)
+    const profileImg = document.getElementById('profileImg');
+    if(profileImg) {
+        profileImg.addEventListener('click', function() {
+            // You can implement photo upload here
+            console.log('Click to upload profile photo');
+        });
+    }
+</script>
+
+</body>
+</html>
